@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+Infant&display=swap');
+body{
+  background-color:white;
+
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ysabeau Infant', sans-serif;
+  
+
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  height: 80px;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 222;
+  box-shadow: 0 5px 10px -5px rgb(49, 49, 49);
+
+  
+
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s ease-in-out;
+}
+.nav-links li a:hover {
+  text-decoration: underline;
+  
+  
+}
+
+
+.login{
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #685268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+  }
+  .blogs{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.blog-container {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+
+.blog-post {
+  width: 70%;  
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  color:black;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  flex-wrap: wrap;
+  text-align: left;
+  
+}
+
+  
+
+
+.blog-post h2 {
+  margin-bottom: 10px;
+}
+
+.readmore {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid darkorange; /* Border color */
+  color: darkorange; /* Text color */
+  background-color: #ffffff; /* Background color */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s, color 0.3s;
+  margin-top: 10px;
+}
+.readmore:hover{
+  background-color: darkorange; /* Background color on hover */
+  color: #ffffff; /* Text color on hover */
+}
+
+
+/* Footer.css */
+
+.footer-container {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  
+  
+  
+}
+
+.footer-section {
+  max-width: 300px;
+}
+
+h3 {
+  color: #3498db;
+}
+
+
+
+.social-icons a {
+  color: #fff;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid #555;
+  margin-top: 20px;
+  
+}.popover {
+  width: 600px;
+  height: 400px;
+    background-color: hsl(120deg 20% 95%);
+  box-shadow:
+    34px 34px 68px hsl(120, 1%, 14%), 
+    inset -8px -8px 16px hsl(120deg 20% 50% / 70%), 
+    inset 0px 14px 28px hsl(120deg 20% 95%); 
+
+  backdrop-filter: blur(9px);
+  border-radius: 26px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.subscription-layout {
+  text-align: center;
+}
+
+.subscription-text {
+  color: black;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.email-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.subscribe-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db; /* Blue color */
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-button:hover {
+  background-color: #2980b9; /* Darker shade of blue on hover */
+}
+.cancel{
+  position: absolute;
+  top: 1%;
+  left: 96%;
+  font-size: 20px;
+}
+.cancel:hover{
+  cursor: pointer;
+}
+.fas{
+  color: black;
+}
+
+
+
+.contact-us {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(95, 88, 88, 0.2);
+
+  
+}
+
+.contact-us h2 {
+  color: #fff;
+  text-align: center;
+}
+
+.contact-us form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-us label.contact-us  {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.contact-us input,
+.contact-us textarea {
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-us button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db; /* Blue color */
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+}
+
+.contact-us button:hover {
+  background-color: #2980b9; /* Darker shade of blue on hover */
+}
+
+
+
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 60px 0;
+}
+
+.blogPost {
+  border: 1px solid #ddd;
+  margin: 10px;
+  padding: 20px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+}
+
+.post-image {
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.post-details {
+  flex: 1;
+}
+
+.post-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.post-content {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.post-meta {
+  margin-top: 15px;
+  color: #888;
+}
+
+.post-author,
+.post-date {
+  margin: 5px 0;
+}
+
+.post-actions {
+  margin-top: 15px;
+}
+
+.action-button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #2980b9;
+}
