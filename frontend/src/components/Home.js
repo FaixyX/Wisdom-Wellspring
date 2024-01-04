@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Home = () => {
+  // States to manage posts, confirmation dialog, selected post, edit dialogs, edited title, and content
   const [posts, setPosts] = useState(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
@@ -9,6 +10,7 @@ const Home = () => {
   const [editedTitle, setEditedTitle] = useState('');
   const [editedContent, setEditedContent] = useState('');
 
+  // Fetch posts from the server on component mount using useEffect
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -25,8 +27,9 @@ const Home = () => {
     };
 
     fetchPosts();
-  }, [setPosts]);
+  }, []);
 
+  // Delete post based on postId
   const handleDelete = async (postId) => {
     try {
       const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
@@ -44,28 +47,33 @@ const Home = () => {
     }
   };
 
+  // Display confirmation dialog for deleting a post
   const confirmDelete = (postId) => {
     setShowConfirmDialog(true);
     setSelectedPostId(postId);
   };
 
+  // Handle confirmation for deleting a post
   const handleConfirmDelete = () => {
     handleDelete(selectedPostId);
     setShowConfirmDialog(false);
     setSelectedPostId(null);
   };
 
+  // Handle cancellation of post deletion
   const handleCancelDelete = () => {
     setShowConfirmDialog(false);
     setSelectedPostId(null);
   };
 
+  // Confirm editing a post and set edited title, content, and show edit dialog
   const confirmEdit = (postId, postTitle, postContent) => {
     setEditedTitle(postTitle);
     setEditedContent(postContent);
     setEditDialogs({ ...editDialogs, [postId]: true });
   };
 
+  // Handle editing a post and send PATCH request to update the post
   const handleEdit = async (postId) => {
     try {
       const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
@@ -91,18 +99,22 @@ const Home = () => {
     }
   };
 
+  // Display posts and their respective actions
   return (
     <div className="home-container">
       {posts &&
         posts.map((post) => (
           <div key={post._id} className="blogPost">
             <div className="post-details">
+              {/* Display post details */}
               <h2 className="post-title">{post.title}</h2>
               <p className="post-content">{post.content}</p>
               <div className="post-meta">
                 <p className="post-author">By {post.author}</p>
+                {/* Display post's updated time */}
                 <p>{formatDistanceToNow(new Date(post.updatedAt), { addSuffix: true })}</p>
               </div>
+              {/* Display actions (Delete, Edit) */}
               <div className="post-actions">
                 <button className="action-button" onClick={() => confirmDelete(post._id)}>
                   Delete
@@ -111,6 +123,7 @@ const Home = () => {
                   Edit
                 </button>
               </div>
+              {/* Display confirmation dialog for post deletion */}
               {showConfirmDialog && selectedPostId === post._id && (
                 <div className="confirm-dialog">
                   <p>Are you sure you want to delete this post?</p>
@@ -122,6 +135,7 @@ const Home = () => {
                   </button>
                 </div>
               )}
+              {/* Display edit dialog to edit post title and content */}
               {editDialogs[post._id] && (
                 <div className="edit-dialog">
                   <h2>Edit Post</h2>
@@ -131,6 +145,7 @@ const Home = () => {
                       handleEdit(post._id);
                     }}
                   >
+                    {/* Input field to edit post title */}
                     <label htmlFor={`edited-title-${post._id}`}>Title:</label>
                     <input
                       type="text"
@@ -139,6 +154,7 @@ const Home = () => {
                       onChange={(e) => setEditedTitle(e.target.value)}
                     />
 
+                    {/* Textarea to edit post content */}
                     <label htmlFor={`edited-content-${post._id}`}>Content:</label>
                     <textarea
                       id={`edited-content-${post._id}`}
@@ -146,6 +162,7 @@ const Home = () => {
                       onChange={(e) => setEditedContent(e.target.value)}
                     ></textarea>
 
+                    {/* Save and cancel buttons */}
                     <button type="submit">Save</button>
                     <button onClick={() => setEditDialogs({ ...editDialogs, [post._id]: false })}>
                       Cancel

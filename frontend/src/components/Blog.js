@@ -1,23 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
+const Home = () => {
+  const [posts, setPosts] = useState(null);
 
-export default function Blog({posts}) {
-   
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/posts');
+        if (response.ok) {
+          const json = await response.json();
+          setPosts(json);
+        } else {
+          throw new Error('Failed to fetch');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
 
-    return (
-    <section className="blogContainer">
-        <h2 className="blogs">Blogs</h2>
-          <div className="blog-container">
-          
-         {posts.map((post) => (
-         <div key={post.id} className="blog-post">
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-          <span className="readmore">Read more</span>
+    fetchPosts();
+  }, []);
+
+  const handleLike = (postId) => {
+    // Handle liking a post
+    console.log(`Liked post with ID: ${postId}`);
+  };
+
+  const handleShare = (postId) => {
+    // Handle sharing a post
+    console.log(`Shared post with ID: ${postId}`);
+  };
+
+  const handleComment = (postId) => {
+    // Handle commenting on a post
+    console.log(`Commented on post with ID: ${postId}`);
+  };
+
+  return (
+    <div className="home-container">
+      {posts &&
+        posts.map((post) => (
+          <div key={post._id} className="blogPost">
+            <div className="post-details">
+              <h2 className="post-title">{post.title}</h2>
+              <p className="post-content">{post.content}</p>
+              <div className="post-meta">
+                <p className="post-author">By {post.author}</p>
+                <p>{formatDistanceToNow(new Date(post.updatedAt), { addSuffix: true })}</p>
+                {/* Buttons for Like, Share, and Comment */}
+                <div className="post-actions">
+                    <button className="action-button" onClick={() => handleLike(post._id)}> Like </button>
+                    <button className="action-button" onClick={() => handleShare(post._id)}> Share</button>
+                    <button className="action-button" onClick={() => handleComment(post._id)}> Comment </button>
+                </div>
+              </div>
+            </div>
+            
           </div>
-          ))}
-          </div>
-     </section>
-      
-    )
-}
+        ))}
+    </div>
+  );
+};
+
+export default Home;
