@@ -39,7 +39,7 @@ const getPost = async (req, res) => {
 const createPost = async(req,res) => {
 
     // Extract title and content from the request body
-    const {title, content} = req.body
+    const {title, content, author} = req.body
 
     // Check if title and content are present
     let emptyFields = []
@@ -47,6 +47,9 @@ const createPost = async(req,res) => {
         emptyFields.push('title')
     }
     if(!content){
+        emptyFields.push('content')
+    }
+    if(!author){
         emptyFields.push('content')
     }
 
@@ -58,7 +61,7 @@ const createPost = async(req,res) => {
     // Attempt to add the post to the database
     try{
         // Assuming there's a Post model or schema defined somewhere
-        const post = await Post.create({title, content})
+        const post = await Post.create({title, content, author})
         // Respond with a 200 OK status and the created post
         res.status(200).json(post)}
     catch(error){

@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
-import ContactUs from './components/Contact';
+import Makepost from './components/Makepost';
 import Home from './components/Home';
 import { Route, Routes } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/blog' element={<Blog posts={blogPosts}/>}/>
-        <Route path='/contact' element={<ContactUs/>}/>
+        <Route path='/makepost' element={<Makepost/>}/>
 
 
       </Routes> 

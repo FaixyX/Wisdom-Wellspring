@@ -4,9 +4,6 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 
-
-
-
 export default function Header(props) {
   const [isPopoverOpen, setPopoverOpen] = useState(false);
 
@@ -21,7 +18,7 @@ export default function Header(props) {
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/blog">Blog</NavLink></li>
         {/*<li><NavLink to="/services">Services</NavLink></li>*/}
-        <li><NavLink to="/contact">Contact us</NavLink></li>
+        <li><NavLink to="/makepost">Publish a Post</NavLink></li>
         {/*<li><NavLink to="/about">About us</NavLink></li>*/}
     </ul>
     <button className='login' onClick={handleSubscribeClick}>Subscribe</button>
@@ -36,13 +33,8 @@ export default function Header(props) {
           </div>
           
           <i className="fas fa-times-circle cancel" onClick={handleSubscribeClick}></i>
-          
-          
-          
         </div>
-      )}
-    
-    
+      )} 
   </nav>
   )
 }
