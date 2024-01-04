@@ -225,7 +225,7 @@ h3 {
 
 
 
-.contact-us {
+.make-post {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
@@ -237,23 +237,23 @@ h3 {
   
 }
 
-.contact-us h2 {
+.make-post h2 {
   color: #fff;
   text-align: center;
 }
 
-.contact-us form {
+.make-post form {
   display: flex;
   flex-direction: column;
 }
 
-.contact-us label.contact-us  {
+.make-post label.make-post  {
   margin-top: 10px;
   color: #fff;
 }
 
-.contact-us input,
-.contact-us textarea {
+.make-post input,
+.make-post textarea {
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 15px;
@@ -261,7 +261,7 @@ h3 {
   border-radius: 5px;
 }
 
-.contact-us button {
+.make-post button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -272,7 +272,7 @@ h3 {
   
 }
 
-.contact-us button:hover {
+.make-post button:hover {
   background-color: #2980b9; /* Darker shade of blue on hover */
 }
 
@@ -344,4 +344,35 @@ h3 {
 
 .action-button:hover {
   background-color: #2980b9;
+}
+
+
+/* Add a class for centering the dialog */
+.confirm-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9; 
+  color: #333; 
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999; 
+}
+
+/* Additional styling for buttons inside the dialog */
+.confirm-dialog button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #3498db; /* Match the button background */
+  color: #ccc; /* Match the button text color */
+  cursor: pointer;
+}
+
+.confirm-dialog button:hover {
+  background-color: #2980b9; /* Change color on hover */
 }
