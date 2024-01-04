@@ -5,12 +5,15 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // Import routes
 const postRoutes = require('./routes/posts');
 
 // Create an Express app
 const app = express();
+
+app.use(cors());
 
 // Middleware for parsing incoming request bodies in JSON format
 app.use(express.json());
