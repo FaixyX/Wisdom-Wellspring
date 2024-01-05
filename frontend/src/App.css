@@ -120,6 +120,30 @@ body{
 
 /* Footer.css */
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Main content wrapper */
+.main-content {
+  flex: 1;
+}
+
+/* Footer styles */
+.footer-container {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+}
+
+/* Footer bottom */
+.footer-bottom {
+  text-align: center;
+}
+
 .footer-container {
   background-color: #333;
   color: #fff;
@@ -129,9 +153,6 @@ body{
 .footer-content {
   display: flex;
   justify-content: space-around;
-  
-  
-  
 }
 
 .footer-section {

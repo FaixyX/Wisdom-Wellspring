@@ -14,9 +14,9 @@ const postSchema = new Schema (
             required: true,
         },
         author: {
-            type: String,
-            required: true,
-        },
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User', // Reference to the User model
+          },
         likes: {
             type: Number,
             default: 0,
@@ -25,10 +25,6 @@ const postSchema = new Schema (
             type: String,
             user: String,
         },
-        user_id: {
-            type: String,
-            required: true
-          },
     },
     {
         timestamps: true,
