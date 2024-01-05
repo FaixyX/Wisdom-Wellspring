@@ -9,6 +9,7 @@ const cors = require('cors');
 
 // Import routes
 const postRoutes = require('./routes/posts');
+const userRoutes = require('./routes/users')
 
 // Create an Express app
 const app = express();
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 // Define routes
 app.use('/api/posts', postRoutes); // Use postRoutes for '/api/posts' endpoint
+app.use('/api/user', userRoutes); // Use userRoutes for '/api/user' endpoint
 
 // Example route to test the working of the app
 app.get('/', (req, res) => {

@@ -1,9 +1,9 @@
 import './App.css';
 import Header from './components/Header';
-import Blog from './components/Blog';
+import Blog from './pages/Blog';
 import Footer from './components/Footer';
-import Makepost from './components/Makepost';
-import Home from './components/Home';
+import Makepost from './pages/Makepost';
+import Home from './pages/Home';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {

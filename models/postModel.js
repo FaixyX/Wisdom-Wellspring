@@ -24,7 +24,11 @@ const postSchema = new Schema (
         comments: {
             type: String,
             user: String,
-        }
+        },
+        user_id: {
+            type: String,
+            required: true
+          },
     },
     {
         timestamps: true,
