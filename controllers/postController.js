@@ -117,6 +117,34 @@ const updatePost = async (req, res) => {
     res.status(200).json({ post });
 };
 
+// Route for liking a post
+const likePost = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      // Find the post by ID
+      const post = await Post.findById(id);
+  
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+  
+      // Increment the likes count without modifying updatedAt
+      await Post.findByIdAndUpdate(
+        id,
+        { $inc: { likes: 1 } }, // Increment likes count by 1
+        { new: true, runValidators: true, setDefaultsOnInsert: true, timestamps: false } // Options to prevent touching updatedAt
+      );
+  
+      // Respond with a success message or updated post
+      res.status(200).json({ message: 'Post liked successfully' });
+    } catch (error) {
+      console.error('Error liking the post:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  };
+  
+
 
 // Export Functions to other Files
 module.exports = {
@@ -125,4 +153,5 @@ module.exports = {
     createPost,
     deletePost,
     updatePost,
+    likePost,
 }

@@ -4,6 +4,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 const Home = () => {
   // States to manage posts, confirmation dialog, selected post, edit dialogs, edited title, and content
   const [posts, setPosts] = useState(null);
+  const [loading, setLoading] = useState(true); // Added loading state
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [editDialogs, setEditDialogs] = useState({});
@@ -18,6 +19,7 @@ const Home = () => {
         if (response.ok) {
           const json = await response.json();
           setPosts(json);
+          setLoading(false); // Set loading to false after posts are fetched
         } else {
           throw new Error('Failed to fetch');
         }

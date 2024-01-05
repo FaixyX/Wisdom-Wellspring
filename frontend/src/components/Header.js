@@ -16,7 +16,7 @@ export default function Header(props) {
     <div className="logo">{props.title}</div>
     <ul className="nav-links">
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/blog">Blog</NavLink></li>
+        <li><NavLink to="/myblog">My Blogs</NavLink></li>
         {/*<li><NavLink to="/services">Services</NavLink></li>*/}
         <li><NavLink to="/makepost">Publish a Post</NavLink></li>
         {/*<li><NavLink to="/about">About us</NavLink></li>*/}

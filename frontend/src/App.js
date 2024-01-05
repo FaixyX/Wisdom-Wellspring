@@ -12,8 +12,8 @@ function App() {
     <>
       <Header title="Wisdom Wellspring" ></Header>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/blog' element={<Blog/>}/>
+        <Route path='/' element={<Blog/>}/>
+        <Route path='/myblog' element={<Home/>}/>
         <Route path='/makepost' element={<Makepost/>}/>
       </Routes> 
       <Footer></Footer>

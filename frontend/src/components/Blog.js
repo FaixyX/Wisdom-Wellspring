@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-const Home = () => {
+const Blog = () => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
@@ -22,10 +22,31 @@ const Home = () => {
     fetchPosts();
   }, []);
 
-  const handleLike = (postId) => {
-    // Handle liking a post
-    console.log(`Liked post with ID: ${postId}`);
-  };
+  // Assuming your existing handleLike function in the frontend
+const handleLike = async (postId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
+      method: 'PATCH',
+    });
+
+    if (response.ok) {
+      // Fetch updated posts after liking
+      const updatedPostsResponse = await fetch('http://localhost:5000/api/posts');
+      
+      if (updatedPostsResponse.ok) {
+        const updatedPosts = await updatedPostsResponse.json();
+        setPosts(updatedPosts); // Update the state with updated posts
+      } else {
+        throw new Error('Failed to fetch updated posts');
+      }
+    } else {
+      throw new Error('Failed to like the post');
+    }
+  } catch (error) {
+    console.error('Error liking the post:', error);
+  }
+};
+
 
   const handleShare = (postId) => {
     // Handle sharing a post
@@ -48,19 +69,20 @@ const Home = () => {
               <div className="post-meta">
                 <p className="post-author">By {post.author}</p>
                 <p>{formatDistanceToNow(new Date(post.updatedAt), { addSuffix: true })}</p>
+                {/* Display number of likes */}
+                <p>Likes: {post.likes}</p>
                 {/* Buttons for Like, Share, and Comment */}
                 <div className="post-actions">
-                    <button className="action-button" onClick={() => handleLike(post._id)}> Like </button>
-                    <button className="action-button" onClick={() => handleShare(post._id)}> Share</button>
-                    <button className="action-button" onClick={() => handleComment(post._id)}> Comment </button>
+                  <button className="action-button" onClick={() => handleLike(post._id)}> Like </button>
+                  <button className="action-button" onClick={() => handleComment(post._id)}> Comment </button>
+                  <button className="action-button" onClick={() => handleShare(post._id)}> Share</button>
                 </div>
               </div>
             </div>
-            
           </div>
         ))}
     </div>
   );
 };
 
-export default Home;
+export default Blog;
