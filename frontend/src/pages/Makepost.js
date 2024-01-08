@@ -58,7 +58,7 @@ const Makepost = () => {
           onChange={handleChange}
           required
         />
-
+{/* 
         <label htmlFor="author">Author Name:</label>
         <input
           type="text"
@@ -67,7 +67,7 @@ const Makepost = () => {
           value={formData.author} // Use correct formData property for value
           onChange={handleChange}
           required
-        />
+        /> */}
 
         <label htmlFor="content">Content:</label>
         <textarea

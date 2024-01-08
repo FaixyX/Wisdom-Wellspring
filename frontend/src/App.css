@@ -275,9 +275,9 @@ h3 {
 
 .make-post input,
 .make-post textarea {
-  padding: 10px;
+  padding: 25px;
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
