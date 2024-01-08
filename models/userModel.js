@@ -25,10 +25,10 @@ const userSchema = new Schema({
   });
 
 // static signup method
-userSchema.statics.signup = async function(email, password, username) {
+userSchema.statics.signup = async function(email, username, password ) {
 
     // Validation
-    if (!email || !password || !username){
+    if (!email || !username || !password ){
         throw Error('All Fields are Mandatory')
     }
     if(!validator.isEmail(email)){
@@ -58,7 +58,7 @@ userSchema.statics.signup = async function(email, password, username) {
 }
 
 // static login method
-userSchema.statics.login = async function (email,password) {
+userSchema.statics.login = async function (email, password) {
     if (!email || !password){
         throw Error('All Fields are Mandatory')
     }

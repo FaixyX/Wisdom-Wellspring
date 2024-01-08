@@ -1,45 +1,21 @@
 import React, { useState } from 'react';
+import { useSignup } from '../hooks/useSignup';
 import '../signup.css';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { signup, isLoading, error } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate the form data before submission
-    if (password !== confirmPassword) {
-      // Handle password mismatch error
-      console.error('Passwords do not match');
-      return;
-    }
-
-    // Perform submission logic here (similar to login component)
-    try {
-      // Your fetch logic here for signing up the user
-      const response = await fetch('http://localhost:5000/api/user/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      if (response.ok) {
-        // Handle successful signup
-      } else {
-        // Handle signup failure
-      }
-    } catch (error) {
-      // Handle errors during signup
-      console.error('Error signing up:', error);
-    }
+    await signup(email, username, password)
   };
 
   return (
+
     <div className="signup-container">
       <h2>Signup</h2>
       <form onSubmit={handleSubmit} className="signup-form">
@@ -65,7 +41,6 @@ const Signup = () => {
                 className="form-input"/>
             </div>
 
-
         <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input
@@ -75,17 +50,9 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-input"/>
             </div>
-        <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="form-input"/>
-            </div>
-
-        <button type="submit">Signup</button>
+            
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit" disabled={isLoading}>Signup</button>
       </form>
     </div>
   );
