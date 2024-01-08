@@ -71,7 +71,7 @@ const Signup = () => {
             <input
                 type="password"
                 id="password"
-                value={email}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-input"/>
             </div>
@@ -80,7 +80,7 @@ const Signup = () => {
             <input
                 type="password"
                 id="confirmPassword"
-                value={email}
+                value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="form-input"/>
             </div>

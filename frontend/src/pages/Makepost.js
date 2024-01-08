@@ -29,7 +29,7 @@ const Makepost = () => {
       if (response.ok) {
         // If form submission is successful
         console.log('Form data sent successfully!');
-        setFormData({ title: '', content: '', author: '' }); // Reset form fields
+        setFormData({ title: '', content: ''}); // Reset form fields
         setShowSuccessDialog(true); // Show success dialog on successful submission
         setTimeout(() => {
           setShowSuccessDialog(false); // Hide success dialog after a certain time (optional)
@@ -58,16 +58,6 @@ const Makepost = () => {
           onChange={handleChange}
           required
         />
-{/* 
-        <label htmlFor="author">Author Name:</label>
-        <input
-          type="text"
-          id="author"
-          name="author"
-          value={formData.author} // Use correct formData property for value
-          onChange={handleChange}
-          required
-        /> */}
 
         <label htmlFor="content">Content:</label>
         <textarea
