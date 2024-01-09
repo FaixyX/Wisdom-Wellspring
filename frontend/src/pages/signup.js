@@ -3,8 +3,8 @@ import { useSignup } from '../hooks/useSignup';
 import '../signup.css';
 
 const Signup = () => {
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { signup, isLoading, error } = useSignup();
 
@@ -50,7 +50,7 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-input"/>
             </div>
-            
+
         {error && <p className="error-message">{error}</p>}
         <button type="submit" disabled={isLoading}>Signup</button>
       </form>

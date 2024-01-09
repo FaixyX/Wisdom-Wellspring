@@ -1,13 +1,18 @@
-// Footer.js
+import { useAuthContext } from '../hooks/useAuthContext';
+
 
 import React from 'react';
 
 
 const Footer = () => {
+
+  const { user } = useAuthContext()
+
   return (
+
     <footer className="footer-container">
-      <div className="footer-content">
-        <div className="footer-section">
+      {user && (<div className="footer-content">
+      <div className="footer-section">
           <h3>About Us</h3>
           <p>Your company description goes here. Keep it concise and engaging.</p>
         </div>
@@ -23,7 +28,7 @@ const Footer = () => {
             {/* Example: <a href="#" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a> */}
           </div>
         </div>
-      </div>
+      </div>)}
       <div className="footer-bottom">
         <p>&copy; 2024 Your Website. All Rights Reserved.</p>
       </div>

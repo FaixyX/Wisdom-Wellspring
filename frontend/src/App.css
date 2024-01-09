@@ -20,10 +20,21 @@ body{
   margin: 0 auto;
   z-index: 222;
   box-shadow: 0 5px 10px -5px rgb(49, 49, 49);
-
-  
-
 }
+
+.Logout{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.Logout:hover {
+  background-color: #2980b9;
+}
+
 
 .logo {
   font-size: 2rem;
