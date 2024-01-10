@@ -39,20 +39,19 @@ const getPost = async (req, res) => {
 const createPost = async(req,res) => {
 
     // Extract title and content from the request body
-    const {title, content, author} = req.body
+    const {title, author, content} = req.body
 
     // Check if title and content are present
     let emptyFields = []
     if(!title){
         emptyFields.push('title')
     }
+    if(!author){
+        emptyFields.push('author')
+    }
     if(!content){
         emptyFields.push('content')
     }
-    if(!author){
-        emptyFields.push('content')
-    }
-
     // If any fields are missing, respond with a 400 Bad Request status
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
@@ -60,8 +59,9 @@ const createPost = async(req,res) => {
 
     // Attempt to add the post to the database
     try{
+        const user_id = req.user._id
         // Assuming there's a Post model or schema defined somewhere
-        const post = await Post.create({title, content, author})
+        const post = await Post.create({title, author, content, user_id})
         // Respond with a 200 OK status and the created post
         res.status(200).json(post)}
     catch(error){
@@ -144,11 +144,32 @@ const likePost = async (req, res) => {
     }
   };
   
-
+// Get logged-in user's posts
+const getUserPosts = async (req, res) => {
+    try {
+      // Ensure user is authenticated and get the user_id
+      const user_id = req.user._id; 
+  
+      // Fetch all posts from the database for the specific user's id
+      const posts = await Post.find({ user_id }).sort({ createdAt: -1 });
+  
+      // Respond with a 200 OK status and the fetched posts as JSON
+      res.status(202).json(posts);
+    } 
+    catch (error) {
+      // Handle any errors that occur during the process
+      console.error('Error fetching user posts:', error);
+  
+      // Respond with a 500 Internal Server Error status and an error message
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
 
 // Export Functions to other Files
 module.exports = {
     getPosts,
+    getUserPosts,
     getPost,
     createPost,
     deletePost,

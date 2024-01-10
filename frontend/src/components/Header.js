@@ -23,6 +23,7 @@ export default function Header(props) {
           <li><NavLink to="/makepost">Publish a Post</NavLink></li>
       </ul >)}
       {user && (<div>
+        <span>Login as: {user.username} </span>
         <button className='Logout' onClick={handleClick}>Logout</button>
       </div>)}
     {!user && (<ul className="nav-links">

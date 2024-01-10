@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { useAuthContext } from '../hooks/useAuthContext'
+
 
 const Home = () => {
   // States to manage posts, confirmation dialog, selected post, edit dialogs, edited title, and content
@@ -9,31 +11,37 @@ const Home = () => {
   const [editDialogs, setEditDialogs] = useState({});
   const [editedTitle, setEditedTitle] = useState('');
   const [editedContent, setEditedContent] = useState('');
+  const { user } = useAuthContext();
 
-  // Fetch posts from the server on component mount using useEffect
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/posts');
-        if (response.ok) {
-          const json = await response.json();
-          setPosts(json);
-        } else {
-          throw new Error('Failed to fetch');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
+useEffect(() => {
+  const fetchUserPosts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/posts/c_user', {
+        headers: {'Authorization': `Bearer ${user.token}`},
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+        setPosts(json);
+      } else {
+        throw new Error('Failed to fetch');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
 
-    fetchPosts();
-  }, []);
+  if (user) {
+    fetchUserPosts();
+  }
+}, [user]);
 
   // Delete post based on postId
   const handleDelete = async (postId) => {
     try {
       const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
         method: 'DELETE',
+        headers: {'Authorization': `Bearer ${user.token}`}
       });
 
       if (response.ok) {
@@ -80,6 +88,7 @@ const Home = () => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
         },
         body: JSON.stringify({
           title: editedTitle,

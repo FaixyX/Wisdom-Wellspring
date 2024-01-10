@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Blog = () => {
   const [posts, setPosts] = useState(null);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -27,6 +29,7 @@ const handleLike = async (postId) => {
   try {
     const response = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
       method: 'PATCH',
+      headers: {'Authorization': `Bearer ${user.token}`},
     });
 
     if (response.ok) {
@@ -46,7 +49,6 @@ const handleLike = async (postId) => {
     console.error('Error liking the post:', error);
   }
 };
-
 
   const handleShare = (postId) => {
     // Handle sharing a post
