@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('/api/posts/all');
+        const response = await fetch('http://localhost:5000/api/posts/all');
         if (response.ok) {
           const json = await response.json();
           setPosts(json);
@@ -27,7 +27,7 @@ const Home = () => {
   // Assuming your existing handleLike function in the frontend
   const handleLike = async (postId) => {
     try {
-      const response = await fetch(`/api/posts/${postId}/like`, {
+      const response = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${user.token}` },
       });

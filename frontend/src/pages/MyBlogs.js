@@ -16,7 +16,7 @@ const MyBlogs = () => {
 useEffect(() => {
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch('/api/posts', {
+      const response = await fetch('http://localhost:5000/api/posts', {
         headers: {'Authorization': `Bearer ${user.token}`},
       });
 
@@ -39,7 +39,7 @@ useEffect(() => {
   // Delete post based on postId
   const handleDelete = async (postId) => {
     try {
-      const response = await fetch(`/api/posts/${postId}`, {
+      const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {'Authorization': `Bearer ${user.token}`}
       });
@@ -84,7 +84,7 @@ useEffect(() => {
   // Handle editing a post and send PATCH request to update the post
   const handleEdit = async (postId) => {
     try {
-      const response = await fetch(`/api/posts/${postId}`, {
+      const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
