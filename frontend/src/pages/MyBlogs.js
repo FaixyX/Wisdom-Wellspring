@@ -16,7 +16,7 @@ const MyBlogs = () => {
 useEffect(() => {
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/posts', {
+      const response = await fetch('/api/posts', {
         headers: {'Authorization': `Bearer ${user.token}`},
       });
 
@@ -39,7 +39,7 @@ useEffect(() => {
   // Delete post based on postId
   const handleDelete = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+      const response = await fetch(`/api/posts/${postId}`, {
         method: 'DELETE',
         headers: {'Authorization': `Bearer ${user.token}`}
       });
@@ -84,7 +84,7 @@ useEffect(() => {
   // Handle editing a post and send PATCH request to update the post
   const handleEdit = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+      const response = await fetch(`/api/posts/${postId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -95,11 +95,23 @@ useEffect(() => {
           content: editedContent,
         }),
       });
-
+  
       if (response.ok) {
-        console.log(`Post with ID ${postId} updated successfully!`);
+        const updatedPosts = posts.map((post) => {
+          if (post._id === postId) {
+            return {
+              ...post,
+              title: editedTitle,
+              content: editedContent,
+              updatedAt: new Date().toISOString(), // Update the updatedAt timestamp
+            };
+          }
+          return post;
+        });
+  
+        setPosts(updatedPosts);
         setEditDialogs({ ...editDialogs, [postId]: false });
-        setSelectedPostId(null); // To trigger a re-fetch of posts
+        setSelectedPostId(null);
       } else {
         console.error('Failed to update post');
       }
@@ -107,11 +119,12 @@ useEffect(() => {
       console.error('Error updating post:', error);
     }
   };
+  
 
   // Display posts and their respective actions
   return (
     <div className="blog-container">
-      {posts &&
+      { posts && posts.length > 0 ? (
         posts.map((post) => (
           <div key={post._id} className="blogPost">
             <div className="post-details">
@@ -181,7 +194,12 @@ useEffect(() => {
               )}
             </div>
           </div>
-        ))}
+        ))) : (
+            // Display a message when there are no posts
+            <div className="no-posts-message">
+              <p>You currently have no Blogs. Post a new one.</p>
+            </div>
+        )}
     </div>
   );
 };

@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/posts/all');
+        const response = await fetch('/api/posts/all');
         if (response.ok) {
           const json = await response.json();
           setPosts(json);
@@ -25,40 +25,43 @@ const Home = () => {
   }, []);
 
   // Assuming your existing handleLike function in the frontend
-const handleLike = async (postId) => {
-  try {
-    const response = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
-      method: 'PATCH',
-      headers: {'Authorization': `Bearer ${user.token}`},
-    });
-
-    if (response.ok) {
-      // Fetch updated posts after liking
-      const updatedPostsResponse = await fetch('http://localhost:5000/api/posts');
-      
-      if (updatedPostsResponse.ok) {
-        const updatedPosts = await updatedPostsResponse.json();
-        setPosts(updatedPosts); // Update the state with updated posts
+  const handleLike = async (postId) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/like`, {
+        method: 'PATCH',
+        headers: { 'Authorization': `Bearer ${user.token}` },
+      });
+  
+      if (response.ok) {
+        const updatedPosts = posts.map((post) => {
+          if (post._id === postId) {
+            return {
+              ...post,
+              likes: post.likes + 1, // Increment the likes count
+            };
+          }
+          return post;
+        });
+  
+        setPosts(updatedPosts); // Update the state with updated likes count
       } else {
-        throw new Error('Failed to fetch updated posts');
+        throw new Error('Failed to like the post');
       }
-    } else {
-      throw new Error('Failed to like the post');
+    } catch (error) {
+      console.error('Error liking the post:', error);
     }
-  } catch (error) {
-    console.error('Error liking the post:', error);
-  }
-};
-
-  const handleShare = (postId) => {
-    // Handle sharing a post
-    console.log(`Shared post with ID: ${postId}`);
   };
+  
 
-  const handleComment = (postId) => {
-    // Handle commenting on a post
-    console.log(`Commented on post with ID: ${postId}`);
-  };
+  // const handleShare = (postId) => {
+  //   // Handle sharing a post
+  //   console.log(`Shared post with ID: ${postId}`);
+  // };
+
+  // const handleComment = (postId) => {
+  //   // Handle commenting on a post
+  //   console.log(`Commented on post with ID: ${postId}`);
+  // };
 
   return (
     <div className="blog-container">
@@ -76,8 +79,8 @@ const handleLike = async (postId) => {
                 {/* Buttons for Like, Share, and Comment */}
                 <div className="post-actions">
                   <button className="action-button" onClick={() => handleLike(post._id)}> Like </button>
-                  <button className="action-button" onClick={() => handleComment(post._id)}> Comment </button>
-                  <button className="action-button" onClick={() => handleShare(post._id)}> Share</button>
+                  {/* <button className="action-button" onClick={() => handleComment(post._id)}> Comment </button>
+                  <button className="action-button" onClick={() => handleShare(post._id)}> Share</button> */}
                 </div>
               </div>
             </div>

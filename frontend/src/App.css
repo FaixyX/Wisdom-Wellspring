@@ -456,3 +456,11 @@ h3 {
   margin-right: 0;
   background-color: #dc3545;
 }
+
+.no-posts-message{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; /* Adjust the height as needed */
+}
