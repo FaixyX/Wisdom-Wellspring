@@ -30,15 +30,6 @@ app.use((req, res, next) => {
 app.use('/api/posts', postRoutes); // Use postRoutes for '/api/posts' endpoint
 app.use('/api/user', userRoutes); // Use userRoutes for '/api/user' endpoint
 
-app.use(express.static(path.join(__dirname, "./frontend/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./frontend/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
-});
 
 // Example route to test the working of the app
 app.get('/', (req, res) => {
